@@ -1,5 +1,7 @@
 # cppplayground
 
+[![Build Status](https://travis-ci.org/fivunlm/cppplayground.svg?branch=master)](https://travis-ci.org/fivunlm/cppplayground)
+
 ## State Machine Design
 
 A common design technique in the repertoire of most programmers is the venerable finite state machine (FSM). Designers use this programming construct to break complex problems into manageable states and state transitions. There are innumerable ways to implement a state machine.
