@@ -25,9 +25,9 @@ protected:
     void ExternalEvent(int newState, EventData * pData);
     void InternalEvent(int newState, EventData * pData);
 
+    int m_currentState;
 private:
     int m_maxStates;
-    int m_currentState;
     bool m_eventGenerated;
     EventData* m_pEventData;
 
@@ -43,5 +43,28 @@ struct StateStruct
 {
     StateFunc pStateFunc;
 };
+
+#define BEGIN_STATE_MAP \
+public:\
+const StateStruct* GetStateMap() {\
+    static const StateStruct StateMap[] = {
+
+#define STATE_MAP_ENTRY(stateFunc)\
+    { reinterpret_cast<StateFunc>(stateFunc) },
+
+#define END_STATE_MAP \
+    { NULL }\
+    }; \
+    return &StateMap[0]; }
+
+#define BEGIN_TRANSITION_MAP \
+    static const unsigned char TRANSITIONS[] = {\
+
+#define TRANSITION_MAP_ENTRY(entry)\
+    entry,
+
+#define END_TRANSITION_MAP(data) \
+    0 };\
+    ExternalEvent(TRANSITIONS[m_currentState], data);
 
 #endif //CPPPLAYGROUND_STATEMACHINE_H
