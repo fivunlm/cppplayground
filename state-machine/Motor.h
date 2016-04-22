@@ -15,6 +15,8 @@ struct MotorData : public EventData {
 
 class Motor : public StateMachine {
 
+    int m_speed;
+
     enum E_States {
         ST_IDLE = 0,
         ST_STOP,
@@ -43,7 +45,7 @@ class Motor : public StateMachine {
     }
 
 public:
-    Motor() : StateMachine(ST_MAX_STATES, ST_IDLE) { }
+    Motor() : StateMachine(ST_MAX_STATES, ST_IDLE), m_speed(0) { }
 
     void Halt();
 

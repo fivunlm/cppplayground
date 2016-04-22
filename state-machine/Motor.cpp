@@ -28,16 +28,18 @@ void Motor::SetSpeed(MotorData *pData) {
             ST_CHANGE_SPEED,
             ST_IDLE,
     };
-    ExternalEvent(TRANSITIONS[m_currentState], NULL);
+    ExternalEvent(TRANSITIONS[m_currentState], pData);
 }
 
 void Motor::ST_Idle(EventData *pData) {
-    cout << "Motor::ST_Idle" << endl;
+    m_speed = 0;
+    cout << "Motor::ST_Idle - Speed " << m_speed << endl;
 }
 
 // stop the motor
 void Motor::ST_Stop(EventData *pData) {
-    cout << "Motor::ST_Stop" << endl;
+    m_speed = 0;
+    cout << "Motor::ST_Stop - Speed " << m_speed << endl;
 
     // perform the stop motor processing here
     // transition to ST_Idle via an internal event
@@ -46,12 +48,12 @@ void Motor::ST_Stop(EventData *pData) {
 
 // start the motor going
 void Motor::ST_Start(MotorData *pData) {
-    cout << "Motor::ST_Start" << endl;
-    // set initial motor speed processing here
+    m_speed = pData->speed;
+    cout << "Motor::ST_Start - Speed " << m_speed << endl;
 }
 
 // changes the motor speed once the motor is moving
 void Motor::ST_ChangeSpeed(MotorData *pData) {
-    cout << "Motor::ST_ChangeSpeed" << endl;
-    // perform the change motor speed to pData->speed here
+    m_speed = pData->speed;
+    cout << "Motor::ST_ChangeSpeed - Speed " << m_speed << endl;
 }
