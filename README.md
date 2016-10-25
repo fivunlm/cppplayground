@@ -1,4 +1,4 @@
-# cppplayground
+# State Machine
 
 [![Build Status](https://travis-ci.org/fivunlm/cppplayground.svg?branch=master)](https://travis-ci.org/fivunlm/cppplayground)
 
